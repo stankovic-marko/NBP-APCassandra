@@ -1,1 +1,0 @@
-Napredne baze podataka - AP

@@ -12,6 +12,7 @@ using APCassandra.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Cassandra;
 
 namespace APCassandra
 {
@@ -34,6 +35,22 @@ namespace APCassandra
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            var cluster = Cluster.Builder()
+            .AddContactPoints("192.168.99.100")
+            .Build();
+            //Inject cassandra connection
+            services.AddTransient(x => cluster.Connect("apcassandra"));
+            //Create connections to the nodes using a keyspace
+            var session = cluster.Connect("apcassandra");
+            //Execute a query on a connection synchronously
+            var rs = session.Execute("SELECT * FROM auto_by_id");
+            //Iterate through the RowSet
+            foreach (var row in rs)
+            {
+                var value = row.GetValue<int>("");
+                //do something with the value
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

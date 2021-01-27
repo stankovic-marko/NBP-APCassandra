@@ -60,9 +60,6 @@ C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\ru
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.csprojAssemblyReference.cache
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.AssemblyInfoInputs.cache
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.AssemblyInfo.cs
-C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.csproj.CoreCompileInputs.cache
-C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.RazorAssemblyInfo.cache
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.RazorAssemblyInfo.cs
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.TagHelpers.input.cache
@@ -86,3 +83,14 @@ C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\st
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.dll
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.pdb
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.genruntimeconfig.cache
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Create.cshtml.g.cs
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\Cassandra.dll
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.dll
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\System.Management.dll
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Management.dll
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Delete.cshtml.g.cs
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Edit.cshtml.g.cs
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.csproj.CoreCompileInputs.cache
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cache

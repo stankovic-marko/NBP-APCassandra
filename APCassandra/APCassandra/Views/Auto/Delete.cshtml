@@ -1,0 +1,23 @@
+﻿@model APCassandra.Controllers.AutoController
+@{
+    ViewData["Title"] = "Delete";
+}
+
+    <div>
+        <h1>Select which ad to delete</h1>
+
+        <form method="post">
+            <select asp-for="SelectedIndex" class="form-select" aria-label="Default select example">
+                @{
+                    int i = 0;
+                    foreach (AutoModel a in this.Model.UserAutoList)
+                    {
+                        <option value="@i">Auto: @a.Model @a.Brand @a.Color @a.Year @a.Price </option>
+                        i++;
+                    }
+                }
+            </select>
+
+            <button type="submit" asp-action="OnDeleteAd" class="btn btn-danger">Delete</button>
+        </form>
+    </div>

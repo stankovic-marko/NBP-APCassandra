@@ -252,3 +252,6 @@ D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCas
 D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.pdb
 D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.genruntimeconfig.cache
 D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Search\Index.cshtml.g.cs
+D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Delete.cshtml.g.cs
+D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Edit.cshtml.g.cs
+D:\NBPProjekti\APCassandra\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\MyCars.cshtml.g.cs

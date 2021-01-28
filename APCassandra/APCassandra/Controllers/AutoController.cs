@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using APCassandra.Models;
 using Cassandra;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APCassandra.Controllers
@@ -18,9 +20,9 @@ namespace APCassandra.Controllers
         [BindProperty]
         public int SelectedIndex { get; set; }
 
-        private readonly ISession _session;
+        private readonly Cassandra.ISession _session;
 
-        public AutoController(ISession session)
+        public AutoController(Cassandra.ISession session)
         {
             _session = session;
         }
@@ -44,11 +46,20 @@ namespace APCassandra.Controllers
         }
 
         [Authorize]
-        public IActionResult Edit([FromQuery(Name="id")] string id)
+        public IActionResult Edit([FromQuery(Name = "id")] string id)
         {
             GetUserAutoList();
-            Auto = UserAutoList.Where(x => x.Id.ToString() == id).First();
+            Auto = UserAutoList.Where(x => x.Id.ToString() == id).FirstOrDefault();
+            if (Auto == null)
+                return NotFound("Car do not exist");
             return View(this);
+        }
+
+        [Authorize]
+        public IActionResult MyCars()
+        {
+            GetUserAutoList();
+            return View(UserAutoList);
         }
 
         private void GetUserAutoList()
@@ -73,11 +84,15 @@ namespace APCassandra.Controllers
             }
         }
 
-        public IActionResult OnCreateAd()
+
+        [BindProperty]
+        public List<IFormFile> FormFiles { get; set; }
+
+        public async Task<IActionResult> OnCreateAdAsync()
         {
             Auto.Id = Guid.NewGuid();
             Auto.UserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (Auto.EquipmentList.Length > 0)
+            if (Auto.EquipmentList != null && Auto.EquipmentList.Length > 0)
             {
                 Auto.EquipmentList = Auto.EquipmentList.Replace(" ", "");
                 string[] str = Auto.EquipmentList.Split(',');
@@ -93,6 +108,39 @@ namespace APCassandra.Controllers
             {
                 Auto.EquipmentList = "";
             }
+
+
+            // image upload
+            List<string> imageNames = new List<string>();
+            int imageCount = 0;
+            foreach (var formFile in FormFiles)
+            {
+                if (formFile.Length > 0)
+                {
+                    string imageName = Auto.Id.ToString() + imageCount + DateTime.Now.Ticks + ".jpg";
+                    var filePath = Path.Combine("wwwroot\\images",
+                        imageName);
+                    imageCount++;
+                    imageNames.Add(imageName);
+
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            string imageNamesString = "";
+            if (imageNames.Count > 0)
+            {
+
+                for (int i = 0; i < imageNames.Count; i++)
+                {
+                    imageNames[i] = "'" + imageNames[i] + "'";
+                }
+
+                imageNamesString = string.Join(',', imageNames);
+            }
+
             _session.Execute("INSERT INTO auto_by_id (id, brand, color, contact, equipmentlist, fuel, imagesList, model, power, price, showimage, type, userid, volume, year)" +
                 $" VALUES (" +
                 $"{Auto.Id}, " +
@@ -101,11 +149,11 @@ namespace APCassandra.Controllers
                 $"'{Auto.Contact}', " +
                 $"[{Auto.EquipmentList}], " +
                 $"'{Auto.Fuel}', " +
-                $"[''], " +
+                $"[{imageNamesString}], " +
                 $"'{Auto.Model}', " +
                 $"{Auto.Power}, " +
                 $"{Auto.Price}," +
-                $" '', " +
+                $" {imageNames[0]}, " +
                 $"'{Auto.Type}', " +
                 $"'{Auto.UserId}', " +
                 $"{Auto.Volume}, " +
@@ -119,7 +167,7 @@ namespace APCassandra.Controllers
                 $"'{Auto.Fuel}', " +
                 $"'{Auto.Model}', " +
                 $"{Auto.Price}," +
-                $" '', " +
+                $" {imageNames[0]}, " +
                 $"'{Auto.Type}'); "
                 );
 
@@ -130,7 +178,7 @@ namespace APCassandra.Controllers
                 $"{Auto.Id}, " +
                 $"'{Auto.Model}', " +
                 $"'{Auto.Fuel}', " +
-                $" '', " +
+                $" {imageNames[0]}, " +
                 $"{Auto.Price}," +
                 $"'{Auto.Type}'); "
                 );
@@ -142,7 +190,7 @@ namespace APCassandra.Controllers
                 $"{Auto.Id}, " +
                 $"'{Auto.Model}', " +
                 $"'{Auto.Fuel}', " +
-                $" '', " +
+                $" {imageNames[0]}, " +
                 $"{Auto.Price}," +
                 $"'{Auto.Type}'); "
                 );
@@ -154,7 +202,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -166,7 +214,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -178,7 +226,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -190,7 +238,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -202,7 +250,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -214,7 +262,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -226,7 +274,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -238,7 +286,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );
@@ -251,7 +299,7 @@ namespace APCassandra.Controllers
                $"{Auto.Id}, " +
                $"'{Auto.Model}', " +
                $"'{Auto.Fuel}', " +
-               $" '', " +
+               $" {imageNames[0]}, " +
                $"{Auto.Price}," +
                $"'{Auto.Type}'); "
                );

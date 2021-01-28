@@ -7,7 +7,7 @@
     <h1>Create new Ad</h1>
     <div class="card p-5">
 
-        <form method="post">
+        <form enctype="multipart/form-data" method="post">
 
             <div class="input-group mb-3 w-50">
                 <div class="input-group-prepend">
@@ -103,7 +103,16 @@
                 <input asp-for="Auto.EquipmentList" name="EquipmentList" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
+
             <!-- images list -->
+            <dl>
+                <dt>
+                    <label asp-for="FormFiles"></label>
+                </dt>
+                <dd>
+                    <input asp-for="FormFiles" type="file" multiple>
+                </dd>
+            </dl>
 
             <button type="submit" asp-action="OnCreateAd" class="btn btn-primary">Submit</button>
         </form>

@@ -120,7 +120,6 @@ namespace APCassandra.Controllers
                     Type = car.GetValue<string>("type"),
                     Price = car.GetValue<int>("price"),
                     Year = car.GetValue<int>("year"),
-                    Power = car.GetValue<int>("power"),
                     ShowImage = car.GetValue<string>("showimage")
                 });
             }

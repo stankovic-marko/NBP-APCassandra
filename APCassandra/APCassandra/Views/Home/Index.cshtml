@@ -4,6 +4,42 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <div class="card" style="width:60%"><div class="card-body"> kdasjflkasjdklfjskld fjsakfj</div></div>;
+    <div class="card" style="width:100%">
+        <div class="card-body">
+            <form action="/search" method="get">
+                <label for="brand-select">Brend</label>
+                <select id="brand-select" name="brand">
+                    <option value=""></option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+                <label for="model-select">Model</label>
+                <select id="model-select" name="model">
+                    <option value=""></option>
+                    <option value="volvo">m1</option>
+                    <option value="saab">m2</option>
+                    <option value="opel">m3</option>
+                    <option value="audi">m4</option>
+                </select>
+                <select id="type-select" name="type-select">
+                    <option value=""></option>
+                    <option value="suv">SUV</option>
+                    <option value="limo">Limo</option>
+                    <option value="hatch">Hatch</option>
+                </select>
+                <select id="fuel-select" name="fuel-select">
+                    <option value=""></option>
+                    <option value="gasoline">gasoline</option>
+                    <option value="disel">disel</option>
+                    <option value="electric">electric</option>
+                </select>
+                <input type="text" name="startYear" value="" />
+                <input type="text" name="endYear" value="" />
+                <button type="submit">Search</button>
+            </form> 
+        </div>
+    </div>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

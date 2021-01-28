@@ -23,14 +23,6 @@ namespace APCassandra.Controllers
 
         public IActionResult Index()
         {
-            //Execute a query on a connection synchronously
-            var rs = _session.Execute("SELECT * FROM auto_by_id");
-            //Iterate through the RowSet
-            foreach (var row in rs)
-            {
-                var value = row.GetValue<int>("");
-                //do something with the value
-            }
             return View();
         }
 

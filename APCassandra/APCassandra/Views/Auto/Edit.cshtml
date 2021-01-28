@@ -1,20 +1,19 @@
-﻿@model APCassandra.Controllers.AutoController
+﻿@model APCassandra.Controllers.AutoController;
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
 <div>
-    <h1>Create new Ad</h1>
+    <h1>Edit an Ad</h1>
     <div class="card p-5">
-
         <form method="post">
 
             <div class="input-group mb-3 w-50">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Brand</label>
                 </div>
-                <select asp-for="Auto.Brand" name="Brand" class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
+                <select asp-for="Auto.Brand" disabled name="Brand" class="custom-select" id="inputGroupSelect01">
+                    <option selected>@Model.Auto.Brand</option>
                     <option value="BMW">BMW</option>
                     <option value="Mercedes">Mercedes</option>
                     <option value="Renault">Renault</option>
@@ -26,29 +25,29 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Model</span>
                 </div>
-                <input asp-for="Auto.Model" name="Model" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Model" disabled value="@Model.Auto.Model" name="Model" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3 w-50">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Power</span>
                 </div>
-                <input asp-for="Auto.Power" name="Power" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Power" value="@Model.Auto.Model" name="Power" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3 w-50">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Engine Volume</span>
                 </div>
-                <input asp-for="Auto.Volume" name="Volume" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Volume" value="@Model.Auto.Volume" name="Volume" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group mb-3 w-50">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Type</label>
                 </div>
-                <select asp-for="Auto.Type" name="Type" class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
+                <select asp-for="Auto.Type" disabled value="@Model.Auto.Type" name="Type" class="custom-select" id="inputGroupSelect01">
+                    <option selected>@Model.Auto.Type</option>
                     <option value="Convertible">Convertible</option>
                     <option value="Coupé">Coupé</option>
                     <option value="Hatchback">Hatchback</option>
@@ -60,36 +59,36 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Year</span>
                 </div>
-                <input asp-for="Auto.Year" name="Year" type="number" value="2021" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Year" disabled value="@Model.Auto.Year" name="Year" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3 w-50">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Price €</span>
                 </div>
-                <input asp-for="Auto.Price" name="Price" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Price" value="@Model.Auto.Price" name="Price" type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3 w-50">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Color</span>
                 </div>
-                <input asp-for="Auto.Color" name="Color" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Color" value="@Model.Auto.Color" name="Color" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group input-group-sm mb-3 w-50">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">+381</span>
                 </div>
-                <input asp-for="Auto.Contact" name="Contact" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.Contact" value="@Model.Auto.Contact" name="Contact" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <div class="input-group mb-3 w-50">
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Fuel</label>
                 </div>
-                <select name="Fuel" class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
+                <select asp-for="Auto.Fuel" disabled name="Fuel" class="custom-select" id="inputGroupSelect01">
+                    <option selected>@Model.Auto.Fuel</option>
                     <option value="Petrol">Petrol</option>
                     <option value="Diesel">Diesel</option>
                     <option value="Electric">Electric</option>
@@ -100,12 +99,12 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Equipment</span>
                 </div>
-                <input asp-for="Auto.EquipmentList" name="EquipmentList" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <input asp-for="Auto.EquipmentList" value="@Model.Auto.EquipmentList" name="EquipmentList" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
             </div>
 
             <!-- images list -->
 
-            <button type="submit" asp-action="OnCreateAd" class="btn btn-primary">Submit</button>
+            <button type="submit" asp-action="OnEditAd" class="btn btn-primary">Edit</button>
         </form>
     </div>
 </div>

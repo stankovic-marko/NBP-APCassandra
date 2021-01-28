@@ -37,7 +37,7 @@ namespace APCassandra
             services.AddRazorPages();
 
             var cluster = Cluster.Builder()
-            .AddContactPoints("192.168.99.100")
+            .AddContactPoints("localhost")
             .Build();
             //Inject cassandra connection
             services.AddTransient(x => cluster.Connect("apcassandra"));

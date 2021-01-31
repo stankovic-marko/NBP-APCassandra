@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "MyCars";
+}
+
+<h1>MyCars</h1>
+
+@foreach (var car in Model)
+{
+    <hr />
+    <div><a href="/auto/edit/?id=@car.Id">edit</a></div>
+    <div>Preview: <a href="/car/@car.Id">@car.Brand @car.Model</a></div>
+    <div>Year: @car.Year</div>
+    <div>Type: @car.Type</div>
+    <div>Fuel: @car.Fuel</div>
+    <div>Brand: @car.Price</div>
+    <img src="/images/@car.ShowImage" />
+    <hr />
+}

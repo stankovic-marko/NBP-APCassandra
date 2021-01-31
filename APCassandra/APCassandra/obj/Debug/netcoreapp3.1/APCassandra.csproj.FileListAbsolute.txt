@@ -94,3 +94,4 @@ C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Ra
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.csproj.CoreCompileInputs.cache
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\APCassandra.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Marko\Desktop\NBP\AP\APCassandra\APCassandra\obj\Debug\netcoreapp3.1\Razor\Views\Auto\Detail.cshtml.g.cs

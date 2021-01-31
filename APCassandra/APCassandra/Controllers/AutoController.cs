@@ -51,6 +51,22 @@ namespace APCassandra.Controllers
             return View(this);
         }
 
+        public IActionResult Detail([FromQuery(Name = "id")] string id)
+        {
+            this.Auto = new AutoModel();
+            string query = $"SELECT * FROM auto_by_id WHERE id={Guid.Parse(id)};";
+            var rs = _session.Execute(query);
+            var temp = rs.First();
+            Auto.Brand = temp.GetValue<string>("brand");
+            Auto.Model = temp.GetValue<string>("model");
+            Auto.Year = temp.GetValue<int>("year");
+            Auto.Price = temp.GetValue<int>("price");
+            Auto.Power = temp.GetValue<int>("power");
+            Auto.Volume = temp.GetValue<int>("volume");
+            Auto.ShowImage = "https://pict1.reezocar.com/images/480/marktplaza.nl/RZCMKPLZ93001170/RENAULT-MEGANE-00.jpg";
+            return View(this);
+        }
+
         private void GetUserAutoList()
         {
             UserAutoList = new List<AutoModel>();

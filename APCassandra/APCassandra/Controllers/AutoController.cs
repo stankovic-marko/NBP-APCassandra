@@ -50,6 +50,19 @@ namespace APCassandra.Controllers
         {
             GetUserAutoList();
             Auto = UserAutoList.Where(x => x.Id.ToString() == id).FirstOrDefault();
+            string query = $"SELECT * FROM auto_by_id WHERE id={Guid.Parse(id)};";
+            var rs = _session.Execute(query);
+            var temp = rs.First();
+            Auto.Brand = temp.GetValue<string>("brand");
+            Auto.Model = temp.GetValue<string>("model");
+            Auto.Year = temp.GetValue<int>("year");
+            Auto.Price = temp.GetValue<int>("price");
+            Auto.Power = temp.GetValue<int>("power");
+            Auto.Volume = temp.GetValue<int>("volume");
+            Auto.Contact = temp.GetValue<string>("contact");
+            Auto.Color = temp.GetValue<string>("color");
+            Auto.Description = temp.GetValue<string>("description");
+            Auto.EquipmentList = string.Join(", ", temp.GetValue<string[]>("equipmentlist") == null ? new string[0] : temp.GetValue<string[]>("equipmentlist"));
             if (Auto == null)
                 return NotFound("Car do not exist");
             return View(this);
@@ -99,6 +112,7 @@ namespace APCassandra.Controllers
                 UserAutoList.Add(temp);
             }
         }
+
 
 
         [BindProperty]
@@ -407,8 +421,18 @@ namespace APCassandra.Controllers
             return Redirect("/");
         }
 
-        public IActionResult OnEditAd()
+        public async Task<IActionResult> OnEditAd()
         {
+
+
+            GetUserAutoList();
+            var toEdit = UserAutoList.Where(x => x.Id.ToString() == Auto.Id.ToString()).FirstOrDefault();
+            Auto.Model = toEdit.Model;
+            Auto.Brand = toEdit.Brand;
+            Auto.Fuel = toEdit.Fuel;
+            Auto.Type = toEdit.Type;
+            Auto.Year = toEdit.Year;
+
             Auto.UserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (Auto.EquipmentList != null && Auto.EquipmentList.Length > 0)
@@ -428,31 +452,59 @@ namespace APCassandra.Controllers
                 Auto.EquipmentList = "";
             }
 
+            // image upload
+            List<string> imageNames = new List<string>();
+            int imageCount = 0;
+            foreach (var formFile in FormFiles)
+            {
+                if (formFile.Length > 0)
+                {
+                    string imageName = Auto.Id.ToString() + imageCount + DateTime.Now.Ticks + ".jpg";
+                    var filePath = Path.Combine("wwwroot\\images",
+                        imageName);
+                    imageCount++;
+                    imageNames.Add(imageName);
+
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            string imageNamesString = "";
+            if (imageNames.Count > 0)
+            {
+
+                for (int i = 0; i < imageNames.Count; i++)
+                {
+                    imageNames[i] = "'" + imageNames[i] + "'";
+                }
+
+                imageNamesString = string.Join(',', imageNames);
+            }
+
             _session.Execute("UPDATE auto_by_id" +
                 $" SET " +
                 $"color='{Auto.Color}', " +
                 $"contact='{Auto.Contact}', " +
                 $"equipmentlist=[{Auto.EquipmentList}], " +
-                $"imagesList=[''], " +
                 $"power={Auto.Power}, " +
+                $"imageslist = imageslist + [{imageNamesString}], " +
                 $"price={Auto.Price}," +
-                $" showimage='', " +
                 $"volume={Auto.Volume}, " +
                 $"description='{Auto.Description}' " +
                 $"WHERE id={Auto.Id};");
 
             _session.Execute("UPDATE auto_by_brand" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $"WHERE id={Auto.Id} " +
                 $"AND brand ='{Auto.Brand}' " +
                 $"AND year={Auto.Year};");
 
             _session.Execute("UPDATE auto_by_brand_and_model" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand ='{Auto.Brand}' " +
                 $"AND model='{Auto.Model}' " +
@@ -460,8 +512,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_brand_and_model_and_fuel" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand ='{Auto.Brand}' " +
                 $"AND model='{Auto.Model}' " +
@@ -470,8 +521,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_brand_and_model_and_fuel_and_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand ='{Auto.Brand}' " +
                 $"AND model='{Auto.Model}' " +
@@ -481,8 +531,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_brand_and_model_and_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand ='{Auto.Brand}' " +
                 $"AND model='{Auto.Model}' " +
@@ -491,16 +540,14 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_fuel" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND fuel='{Auto.Fuel}'" +
                 $"AND year={Auto.Year};");
 
             _session.Execute("UPDATE auto_by_fuel_and_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND fuel='{Auto.Fuel}'" +
                 $"AND type='{Auto.Type}'" +
@@ -508,16 +555,14 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND type='{Auto.Type}'" +
                 $"AND year={Auto.Year};");
 
             _session.Execute("UPDATE auto_by_brand_and_fuel" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand='{Auto.Brand}'" +
                 $"AND fuel='{Auto.Fuel}'" +
@@ -525,8 +570,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_brand_and_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand='{Auto.Brand}'" +
                 $"AND type='{Auto.Type}'" +
@@ -534,8 +578,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_brand_and_fuel_and_type" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND brand='{Auto.Brand}'" +
                 $"AND type='{Auto.Type}'" +
@@ -544,8 +587,7 @@ namespace APCassandra.Controllers
 
             _session.Execute("UPDATE auto_by_user" +
                 $" SET " +
-                $"price={Auto.Price}," +
-                $" showimage='' " +
+                $"price={Auto.Price} " +
                 $" WHERE id={Auto.Id} " +
                 $"AND user='{Auto.UserId}';");
 

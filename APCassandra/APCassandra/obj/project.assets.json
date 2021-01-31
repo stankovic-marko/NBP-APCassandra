@@ -8925,19 +8925,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Marko\\.nuget\\packages\\": {}
+    "C:\\Users\\jakov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marko\\Desktop\\NBP\\AP\\APCassandra\\APCassandra\\APCassandra.csproj",
+      "projectUniqueName": "D:\\NBPProjekti\\APCassandra\\APCassandra\\APCassandra\\APCassandra.csproj",
       "projectName": "APCassandra",
-      "projectPath": "C:\\Users\\Marko\\Desktop\\NBP\\AP\\APCassandra\\APCassandra\\APCassandra.csproj",
-      "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marko\\Desktop\\NBP\\AP\\APCassandra\\APCassandra\\obj\\",
+      "projectPath": "D:\\NBPProjekti\\APCassandra\\APCassandra\\APCassandra\\APCassandra.csproj",
+      "packagesPath": "C:\\Users\\jakov\\.nuget\\packages\\",
+      "outputPath": "D:\\NBPProjekti\\APCassandra\\APCassandra\\APCassandra\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Marko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9012,7 +9012,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   },

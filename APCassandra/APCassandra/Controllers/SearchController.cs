@@ -23,6 +23,7 @@ namespace APCassandra.Controllers
             [FromQuery(Name = "type")] string type, [FromQuery(Name = "fuel")] string fuel)
         {
             string query = "";
+            bool all = false;
             //auto_by_brand
             if ((brand != null && brand != "") &&
                 (model == null || model == "") && (type == null || type == "") && (fuel == null || fuel == ""))
@@ -96,11 +97,15 @@ namespace APCassandra.Controllers
             else
             {
                 query = $"SELECT * FROM auto_by_id";
+                all = true;
             }
 
             if (startYear != null && startYear != "" && int.TryParse(startYear, out _))
             {
-                query += $" AND year > {startYear}";
+                if (all)
+                    query += $" WHERE year > {startYear}";
+                else
+                    query += $" AND year > {startYear}";
             }
             if (endYear != null && endYear != "" && int.TryParse(endYear, out _))
             {

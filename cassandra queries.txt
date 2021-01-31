@@ -1,0 +1,57 @@
+CREATE TABLE auto_by_id 
+(id uuid PRIMARY KEY, brand text, model text, year int, color text, showImage text, imagesList list<text>,
+ equipmentList list<text>, userId text, contact text, fuel text, volume int, price int, type text, power int);
+
+CREATE TABLE auto_by_brand
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY(brand, year, id));
+
+CREATE TABLE auto_by_brand_and_model
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, model), year, id));
+
+CREATE TABLE auto_by_brand_and_model_and_fuel
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, model, fuel), year, id));
+
+CREATE TABLE auto_by_brand_and_model_and_fuel_and_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, model, fuel, type), year, id));
+
+CREATE TABLE auto_by_brand_and_model_and_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, model, type), year, id));
+
+
+CREATE TABLE auto_by_fuel
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY(fuel, year, id));
+
+
+CREATE TABLE auto_by_fuel_and_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((fuel, type), year, id));
+
+CREATE TABLE auto_by_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY(type, year, id));
+
+
+CREATE TABLE auto_by_brand_and_fuel
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, fuel), year, id));
+
+CREATE TABLE auto_by_brand_and_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, type), year, id));
+
+CREATE TABLE auto_by_brand_and_fuel_and_type
+(brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY((brand, fuel, type), year, id));
+
+CREATE TABLE auto_by_user
+(user text, brand text, year int,  id uuid, model text, fuel text, showimage text, price int, type text,
+PRIMARY KEY(user, id));
+
+ALTER TABLE auto_by_id ADD(description text);
+

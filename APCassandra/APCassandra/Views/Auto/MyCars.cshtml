@@ -9,11 +9,11 @@
 {
     <hr />
     <div><a href="/auto/edit/?id=@car.Id">edit</a></div>
-    <div>Preview: <a href="/car/@car.Id">@car.Brand @car.Model</a></div>
+    <div>Preview: <a href="/auto/detail/?id=@car.Id">@car.Brand @car.Model</a></div>
     <div>Year: @car.Year</div>
     <div>Type: @car.Type</div>
     <div>Fuel: @car.Fuel</div>
     <div>Brand: @car.Price</div>
-    <img src="/images/@car.ShowImage" />
+    <img src="/images/@car.ShowImage"  class="img-fluid" alt="Responsive image" />
     <hr />
 }

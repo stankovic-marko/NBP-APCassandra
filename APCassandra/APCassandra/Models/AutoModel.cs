@@ -22,5 +22,6 @@ namespace APCassandra.Models
         public string UserId { get; set; }
         public int Volume { get; set; }
         public int Year { get; set; }
+        public string Description { get; set; }
     }
 }

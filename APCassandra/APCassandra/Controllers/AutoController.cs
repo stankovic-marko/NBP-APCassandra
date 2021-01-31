@@ -65,9 +65,13 @@ namespace APCassandra.Controllers
             Auto.Model = temp.GetValue<string>("model");
             Auto.Year = temp.GetValue<int>("year");
             Auto.Price = temp.GetValue<int>("price");
+            Auto.Color = temp.GetValue<string>("color");
+            Auto.Contact = temp.GetValue<string>("contact");
             Auto.Power = temp.GetValue<int>("power");
+            Auto.Type = temp.GetValue<string>("type");
             Auto.Volume = temp.GetValue<int>("volume");
             Auto.ShowImage = temp.GetValue<string>("showimage");
+            Auto.ImagesList = temp.GetValue<List<string>>("imageslist");
             return View(this);
         }
 

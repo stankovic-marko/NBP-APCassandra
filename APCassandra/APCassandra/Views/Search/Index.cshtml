@@ -9,7 +9,7 @@
 @foreach (var car in Model)
 {
     <hr />
-    <div>Brand: <a href="/car/@car.Id">@car.Brand @car.Model</a></div>
+    <div>Brand: <a href="/auto/detail/?id=@car.Id">@car.Brand @car.Model</a></div>
     <div>Year: @car.Year</div>
     <div>Type: @car.Type</div>
     <div>Fuel: @car.Fuel</div>
